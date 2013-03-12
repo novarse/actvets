@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.eventpanel {width: 600px; margin: 10px;}
+		#title {font-weight: bold; margin-bottom: 10px;}
+		.spacer {margin-bottom: 5px;}
+		.director {margin-bottom: 20px;}
+		#directions {float: left;}
+		.map {float: right; margin-left: 10px;}
+		.dirs {}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.eventpanel}">
+		<div id="title">
+			<g:Label ui:field="titleField"/>
+		</div>
+		<div id="body">
+			<g:Label ui:field="dateField" styleName="{style.spacer}"/>
+			<g:HTML ui:field="descriptionField" styleName="{style.spacer}"/>
+			<g:HTML ui:field="directorField" styleName="{style.director}"/>
+		</div>
+		<div id="map">
+			<g:VerticalPanel ui:field="mapField" styleName="{style.map}"/>
+		</div>
+		<g:HTML ui:field="directionsField" styleName="{style.dirs}"/>
+	</g:HTMLPanel>
+</ui:UiBinder> 

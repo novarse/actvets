@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='actvc'>
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.googlecode.maps3.Maps3' />
+  <script src="http://maps.google.com/maps/api/js?sensor=false" />
+  <script src="calendarbuilder.js"></script>
+  <stylesheet src="calendarbuilder.css"/>
+ <!-- <inherits name='com.google.gwt.maps.GoogleMaps' />-->
+ <!-- prod <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=ABQIAAAAiJZ3lvG-9Ni3NBj4OZ8IuBTl_LZUVoS0JX1tVByCVFzQgQIYuhRVte13bflspIIu-5VCYhqAQES3Zg" />-->
+ <!-- dev <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=ABQIAAAAiJZ3lvG-9Ni3NBj4OZ8IuBTDGuIrMTXTuhFb_3-zBxCSpjKKdRS4DbAJ5VOrnA0RB8tdXl7lX3hdOA" />-->
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+
+  <!-- Other module inherits                                      -->
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.actvc.client.ACTVC'/>
+
+  <!-- Specify the paths for translatable code                    -->
+  <source path='client'/>
+
+</module>

@@ -1,0 +1,10 @@
+/war
+.classpath
+.externalToolBuilders/
+.gwt/
+.svn/
+gwt-unitCache/
+mylibrary.jar
+o.txt
+rollback.bat
+files

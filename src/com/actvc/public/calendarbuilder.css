@@ -1,0 +1,58 @@
+#tblItems, .thDName {
+    border: 1px double silver;
+}
+
+.thDName {
+    text-align: center;
+}
+
+.thTitle {
+    border: 1px double #fe7;
+    background-color: #ffd;
+}
+
+.title {
+    text-align: center;    
+}
+
+#thTitle {
+    border: 1px double silver;
+}
+
+.divEvent {
+    background-color: lightblue;
+    margin-top: 2px;
+    padding: 1px;
+}
+
+.divEventPH {
+    padding: 10px 1px;
+    background-color: silver;
+    margin-top: 2px;
+}
+
+
+.trWeek {
+    height: 80px;
+    vertical-align: top;
+}
+
+.tdItem {
+    width: 110px;
+    border: 1px double silver;
+}
+
+.tdFillDay {
+    width: 110px;
+    border: none;
+}
+
+.divDate {
+    text-align: center;
+    color: #666666;
+    font-size: .9em;
+}
+
+.itemLink {
+    text-decoration: none;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.menu {}
+		.body {}
+	</ui:style>
+	<g:HTMLPanel>
+		<div id="title">
+			<g:Label ui:field="titleField"/>
+		</div>
+		<div id="menu">
+			<div id="vertmenu">
+				<ul id="search">
+					<li><g:ListBox ui:field="seasonList"/></li>
+					<li><g:CheckBox ui:field="sortBy">Sort by Rider Name</g:CheckBox></li>
+					<li><g:Button ui:field="submitBtn">Submit</g:Button></li>
+				</ul>
+			</div>
+		</div>
+		<div id="body">
+			<g:VerticalPanel ui:field="body" styleName="{style.body}"/>
+		</div>
+	
+	</g:HTMLPanel>
+</ui:UiBinder> 

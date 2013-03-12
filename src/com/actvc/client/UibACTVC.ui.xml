@@ -1,0 +1,83 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		#container {margin: 20px 50px 0 50px; border-width: 1px; border-style: solid; border-color: #d8d8d8; }
+		#header {overflow: hidden; background: url(/images/bg.jpg) repeat-x left top;}
+		#content {margin-left:180px; margin-right:10px;	padding: 0px; text-align: left;	
+			vertical-align: top;}
+		#content span {display: block; width: 100%;}
+
+		#vertmenu {vertical-align: top; font-family: Verdana, Arial, Helvetica, sans-serif;
+ 			font-size: 0.75em; width: 160px; padding: 0px; margin: 0px 0px 0px 10px; float: left;
+ 			background-color: #f8f8ff; border-right: 1px solid #f8f8ff; border-bottom: 1px solid #f8f8ff;}
+html>body		#vertmenu {vertical-align: top; font-family: Verdana, Arial, Helvetica, sans-serif;
+ 			font-size: 100%; width: 160px; padding: 0px; margin: 0px 0px 0px 10px; float: left;
+ 			background-color: #f8f8ff; border-right: 1px solid #f8f8ff; border-bottom: 1px solid #f8f8ff;}
+		#vertmenu p {display: block; background-color: #e5ecf9;	font-size: 90%;	font-weight: bold;
+			padding: 3px 0 5px 5px;	border: 1px solid #c1cfdd; color: #333333; margin: 0px 0px 0px 0px;
+			width: 160px;}	
+html>body		#vertmenu p {display: block; background-color: #e5ecf9;	font-size: 90%;	font-weight: bold;
+			padding: 3px 0 5px 5px;	border: 1px solid #c1cfdd; color: #333333; margin: 0px 0px 0px 0px;
+			width: 154px;}	
+		#vertmenu ul {list-style: none; margin: 5px 0px 10px 5px; padding: 0px; border: none;}
+		#vertmenu ul li {margin: 0px 0px 8px 0px; padding: 0px;}		
+		#vertmenu a {text-decoration : none;}
+		#vertmenu a:hover {font-weight: bold; text-decoration : none; background: #6699ff;
+			color: #ffffff;	cursor: pointer;}		
+		
+		#footer {clear: both; float: center; text-align: center; opacity: 0.20; margin: 100px 10px 0px 10px;}		
+		#footer:hover {clear: both; float: center; text-align: center; opacity: .80; margin: 100px 10px 0px 10px;}
+		#footer a {text-decoration: none; color: black;}
+		
+		.riderPoints {color: black; text-decoration: none; }
+		
+		#smallText {font-size: 0.80em;}
+		html>body #smallText {font-size: 0.75em;}
+		#anchor:hover { color:green; text-decoration:underline; }
+		
+		
+	</ui:style>
+	
+	<g:HTMLPanel>
+		<div id="container">
+
+			<div id="header">
+				<g:Anchor ui:field="urlHomeBannerField" >
+					<img title=" ACT Veterans Cycling Club" src="/images/header.jpg" id="banner"/>
+				</g:Anchor>
+			</div>
+			
+			<div id="vertmenu">
+				<p>Search By</p>
+				<ul id="search">
+					<li>Event<br/><g:ListBox ui:field="eventSearchList"/></li>
+					<li id="smallText"><g:CheckBox ui:field="showAllFutureEventsField">List All Future Events</g:CheckBox></li>
+					<li id="smallText"><g:CheckBox ui:field="showHistoricDataField">List All Historic Data</g:CheckBox></li>
+					<li>Rider Name<br/><g:ListBox ui:field="riderSearchList"/></li>
+					<li>Race Number<br/><g:ListBox ui:field="numberSearchList"/></li>
+					<li><g:Anchor ui:field="riderPoints" styleName = "{style.riderPoints}">Rider Points Report</g:Anchor></li>
+				</ul>
+				<p>Links</p>
+				<ul>
+					<li><g:Anchor ui:field="urlHomeField">Home</g:Anchor></li>
+                    <li><g:Anchor ui:field="eventCalendarField">Calendar</g:Anchor></li>
+					<li><g:Anchor ui:field="gradeChangeField">Change Grade</g:Anchor></li>
+                    <li><g:Anchor ui:field="adminAnchorField">Admin</g:Anchor></li>
+					<li><g:Anchor ui:field="testField">Test</g:Anchor></li>
+					<li><g:Anchor ui:field="test2Field">Test2</g:Anchor></li>
+				</ul>
+			</div>
+		
+			<div id="content">
+				<span><g:VerticalPanel ui:field="contentPanel"/></span>
+			</div>
+			
+			<div id="footer">
+					<hr/>
+					Stephen Wills<br/>
+					<a href="mailto:stephen@novarse.com">stephen@novarse.com</a>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 
