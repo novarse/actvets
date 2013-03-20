@@ -57,7 +57,7 @@ public class EditRaceHistory extends LookupEditBase {
 		lookupTable.setWidget(1, 1, ridersForAnEvent);
 
 		contentTbl = new FlexTable();
-		contentTbl.setWidget(0, 0, new Label("Grade"));
+		contentTbl.setWidget(0, 0, new Label("Race Grade"));
 		contentTbl.setWidget(0, 1, grade);
 		contentTbl.setWidget(1, 0, new Label("Criterium Grade"));
 		contentTbl.setWidget(1, 1, criteriumGrade);
@@ -207,9 +207,9 @@ public class EditRaceHistory extends LookupEditBase {
 			rh.setPlace(checkedPlace);
 			rh.setPoints(checkedPoints);
 			rh.setRaceGrade(grade.getText());
-			// rh.setCriteriumGrade(criteriumGrade.getText());
+			rh.setCriteriumGrade(criteriumGrade.getText());
 			rh.setTime(time.getText());
-			// rh.setComment(comment.getText());
+			rh.setComment(comment.getText());
 
 			saveBtn.setEnabled(false);
 			service.saveRaceHistory(rh);
@@ -326,13 +326,13 @@ public class EditRaceHistory extends LookupEditBase {
 						if (result.getRaceHistory() != null) {
 							TRH rh = result.getRaceHistory();
 							grade.setText(rh.getRaceGrade());
-							// criteriumGrade.setText(rh.getCriteriumGrade());
+							criteriumGrade.setText(rh.getCriteriumGrade());
 							place.setText(Integer.toString(rh.getPlace()));
 							overTheLine.setText(Integer.toString(rh
 									.getOverTheLine()));
 							time.setText(rh.getTime());
 							points.setText(Integer.toString(rh.getPoints()));
-							// comment.setText(rh.getComment());
+							comment.setText(rh.getComment());
 							if (newRb.getValue()) {
 								editRb.setValue(true);
 								deleteBtn.setEnabled(true);

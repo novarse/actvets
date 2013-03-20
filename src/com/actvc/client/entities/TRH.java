@@ -18,6 +18,8 @@ public class TRH implements Serializable, TEntity {
 
 	private String raceGrade;
 
+	private String criteriumGrade;
+
 	private int place;
 
 	private int overTheLine;
@@ -26,19 +28,23 @@ public class TRH implements Serializable, TEntity {
 
 	private int points;
 
+	private String comment;
+
 	public TRH(String id, Long eventId, Long riderId, Date date,
-			String raceGrade, int place, int overTheLine, String time,
-			int points) {
+			String raceGrade, String criteriumGrade, int place,
+			int overTheLine, String time, int points, String comment) {
 		super();
 		this.id = id;
 		this.eventId = eventId;
 		this.riderId = riderId;
 		this.date = date;
 		this.raceGrade = raceGrade;
+		this.criteriumGrade = criteriumGrade;
 		this.place = place;
 		this.overTheLine = overTheLine;
 		this.time = time;
 		this.points = points;
+		this.comment = comment;
 	}
 
 	public TRH() {
@@ -135,8 +141,25 @@ public class TRH implements Serializable, TEntity {
 	@Override
 	public String toExportForm() {
 		return getEventId() + TAB + getDate() + TAB + getRaceGrade() + TAB
-				+ getPlace() + TAB + getTime() + TAB + getOverTheLine() + TAB
-				+ getPoints() + TAB + getRiderId();
+				+ getCriteriumGrade() + TAB + getPlace() + TAB + getTime()
+				+ TAB + getOverTheLine() + TAB + getPoints() + TAB
+				+ getRiderId() + TAB + getComment();
+	}
+
+	public String getCriteriumGrade() {
+		return criteriumGrade;
+	}
+
+	public void setCriteriumGrade(String criteriumGrade) {
+		this.criteriumGrade = criteriumGrade;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
