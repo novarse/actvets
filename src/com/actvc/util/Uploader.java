@@ -43,7 +43,7 @@ public class Uploader {
 	public static void main(String[] args) throws IOException {
 
 		// for (int fileNo = 0; fileNo < 9; fileNo++)
-		int fileNo = 50;
+		int fileNo = 5;
 		if (fileNo < FILENAMES.length) {
 			if (fileNo == 5) {
 				processRaceHistory();
@@ -59,8 +59,8 @@ public class Uploader {
 
 	private static void processRaceHistory() throws FileNotFoundException,
 			MalformedURLException, IOException {
-		for (int i = 1; i <= 1; i++) { // done 4 for local
-			process(5, dir + "raceResults" + i + ".txt");
+		for (int i = 1; i <= 16; i++) { // done 4 for local
+			process(5, dir + "racehistory" + i + ".txt");
 		}
 	}
 

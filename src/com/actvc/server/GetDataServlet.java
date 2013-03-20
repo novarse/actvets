@@ -2,8 +2,6 @@ package com.actvc.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,19 +104,19 @@ public class GetDataServlet extends HttpServlet implements Servlet {
 			} else if (entity == MyConst.RIDERIDX) {
 				iterator = datastore.find().type(TR.class).now();
 			} else if (entity == MyConst.RACEHISTIDX) {
-				Calendar cal = Calendar.getInstance();
-				cal.set(2005, 11, 31);
-				Date start = cal.getTime();
-				cal.set(2001, 11, 31);
-				Date end = cal.getTime();
-				System.out.println("start: " + start);
-				System.out.println("end: " + end);
-
-				iterator = datastore.find().type(TRH.class)
-						.addRangeFilter("date", start, end)
-						.addSort("date", SortDirection.DESCENDING).now();
+				// Calendar cal = Calendar.getInstance();
+				// cal.set(2005, 11, 31);
+				// Date start = cal.getTime();
+				// cal.set(2001, 11, 31);
+				// Date end = cal.getTime();
+				// System.out.println("start: " + start);
+				// System.out.println("end: " + end);
+				//
 				// iterator = datastore.find().type(TRH.class)
+				// .addRangeFilter("date", start, end)
 				// .addSort("date", SortDirection.DESCENDING).now();
+				iterator = datastore.find().type(TRH.class)
+						.addSort("date", SortDirection.DESCENDING).now();
 			} else if (entity == MyConst.PENDINGRACEHISTORYIDX) {
 				iterator = datastore.find().type(TPRH.class).now();
 			} else if (entity == MyConst.SEASONIDX) {
