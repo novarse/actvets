@@ -106,25 +106,6 @@ public class GetDataServlet extends HttpServlet implements Servlet {
 			} else if (entity == MyConst.RACEHISTIDX) {
 				iterator = datastore.find().type(TRH.class)
 						.addSort("date", SortDirection.DESCENDING).now();
-				while (iterator.hasNext()) {
-					out.println(iterator.next().toExportForm());
-				}
-				// Calendar cal = Calendar.getInstance();
-				// cal.set(2000, 0, 1);
-				// Date start = cal.getTime();
-				// cal.set(2005, 11, 31);
-				// Date end = cal.getTime();
-				// log.info("start: " + start);
-				// log.info("end: " + end);
-				// while (iterator.hasNext()) {
-				// TRH o = (TRH) iterator.next();
-				// if (o.getDate().compareTo(start) >= 0
-				// && o.getDate().compareTo(end) <= 0) {
-				// out.println("start: " + start + " end: " + end + " ;"
-				// + o.getDate());
-				// }
-				// }
-				return;
 			} else if (entity == MyConst.PENDINGRACEHISTORYIDX) {
 				iterator = datastore.find().type(TPRH.class).now();
 			} else if (entity == MyConst.SEASONIDX) {

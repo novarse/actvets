@@ -16,6 +16,8 @@ public class ParseRaceHistory implements ParseBase {
 		String[] dateTime = t.split(" ");
 		if (dateTime.length == 2) {
 			t = dateTime[1];
+		} else if (dateTime.length == 1) {
+			t = dateTime[0];
 		} else {
 			t = "";
 		}
@@ -30,6 +32,7 @@ public class ParseRaceHistory implements ParseBase {
 					Long.parseLong(items[7]),
 					AppServiceImpl.processDate(items[1]), items[2].replace(
 							"\"", ""), "", place, overTheLine, t, points, "");
+
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
