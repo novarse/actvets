@@ -3,6 +3,7 @@ package com.actvc.client.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.actvc.client.util.Utils;
 import com.google.code.twig.annotation.Id;
 
 public class TRH implements Serializable, TEntity {
@@ -18,8 +19,6 @@ public class TRH implements Serializable, TEntity {
 
 	private String raceGrade;
 
-	private String criteriumGrade;
-
 	private int place;
 
 	private int overTheLine;
@@ -31,15 +30,14 @@ public class TRH implements Serializable, TEntity {
 	private String comment;
 
 	public TRH(String id, Long eventId, Long riderId, Date date,
-			String raceGrade, String criteriumGrade, int place,
-			int overTheLine, String time, int points, String comment) {
+			String raceGrade, int place, int overTheLine, String time,
+			int points, String comment) {
 		super();
 		this.id = id;
 		this.eventId = eventId;
 		this.riderId = riderId;
 		this.date = date;
 		this.raceGrade = raceGrade;
-		this.criteriumGrade = criteriumGrade;
 		this.place = place;
 		this.overTheLine = overTheLine;
 		this.time = time;
@@ -138,20 +136,13 @@ public class TRH implements Serializable, TEntity {
 	// private int overTheLine;
 	// private String time;
 	// private int points;
+	// private String comment;
 	@Override
 	public String toExportForm() {
-		return getEventId() + TAB + getDate() + TAB + getRaceGrade() + TAB
-				+ getCriteriumGrade() + TAB + getPlace() + TAB + getTime()
-				+ TAB + getOverTheLine() + TAB + getPoints() + TAB
-				+ getRiderId() + TAB + getComment();
-	}
-
-	public String getCriteriumGrade() {
-		return criteriumGrade;
-	}
-
-	public void setCriteriumGrade(String criteriumGrade) {
-		this.criteriumGrade = criteriumGrade;
+		return getEventId() + TAB + Utils.formatDateForExport(getDate()) + TAB
+				+ getRaceGrade() + TAB + getPlace() + TAB + getTime() + TAB
+				+ getOverTheLine() + TAB + getPoints() + TAB + getRiderId()
+				+ TAB + getComment() == null ? "" : getComment();
 	}
 
 	public String getComment() {
@@ -160,6 +151,15 @@ public class TRH implements Serializable, TEntity {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@Override
+	public String toString() {
+		return "TRH [id=" + id + ", eventId=" + eventId + ", riderId="
+				+ riderId + ", date=" + date + ", raceGrade=" + raceGrade
+				+ ", place=" + place + ", overTheLine=" + overTheLine
+				+ ", time=" + time + ", points=" + points + ", comment="
+				+ comment + "]";
 	}
 
 }

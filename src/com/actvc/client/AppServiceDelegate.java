@@ -126,6 +126,8 @@ public class AppServiceDelegate {
 			.getController();
 
 	public void loadFutureEvents(boolean smallList) {
+		System.out.println("in DELEGATE loadFutureEvents");
+
 		controller.event(new LoadingScreenShowIt());
 		service.loadFutureEvents(smallList, new AsyncCallback<TEDTO>() {
 
@@ -167,6 +169,7 @@ public class AppServiceDelegate {
 	}
 
 	public void loadHistoricEvents(boolean smallList) {
+		System.out.println("in loadHistoricEvents");
 		controller.event(new LoadingScreenShowIt());
 		service.loadHistoricEvents(smallList, new AsyncCallback<TEDTO>() {
 

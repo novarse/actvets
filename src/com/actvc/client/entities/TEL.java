@@ -91,4 +91,11 @@ public class TEL implements Serializable, TEntity {
 				+ getLatitude() + TAB + getLongitude() + TAB + getState();
 	}
 
+	@Override
+	public String toString() {
+		return "TEL [id=" + id + ", location=" + location + ", state=" + state
+				+ ", directions=" + directions + ", latitude=" + latitude
+				+ ", longitude=" + longitude + "]";
+	}
+
 }

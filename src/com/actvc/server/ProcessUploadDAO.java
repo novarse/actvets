@@ -43,12 +43,20 @@ public class ProcessUploadDAO {
 	public void processLine(TE event, String[] seg,
 			boolean isRaceDayFileUploadUpdatesRiders) {
 		final String NUMBER = "NUMBER";
-		final int maxParts = 26;
+		final int maxParts = 27;
 		try {
-			if ((isRaceDayFileUploadUpdatesRiders || !seg[6].isEmpty())
-					&& !seg[0].toUpperCase().equals(NUMBER)) {
+			System.out.println("seg = " + Arrays.toString(seg));
+			System.out.println("seg.length = " + seg.length);
+			if (seg.length >= 7) {
+				System.out.println("seg[6] = " + seg[6]);
+			}
+			if ((isRaceDayFileUploadUpdatesRiders || (seg.length >= 7 && !seg[6]
+					.isEmpty())) && !NUMBER.equals(seg[0].toUpperCase())) {
+				System.out.println("cdddddddd");
 				// "Number\tSurname\tFirstName\tGrade\tSubGrade\tCriterium\tRace Grade\tPosition\tOverTheLine\tTime\tPoints\tAVCCNumber\tDOB\tGender\tStreet"
-				// "\tSuburb\tState\tPostcode\tHome Phone\tWork or Mobile\tEmail\tFirst Aid\tEmergency Contact\tEmergency Contact No\tEmergency Contact No2\tID"
+				// "\tSuburb\tState\tPostcode\tHome Phone\tWork or
+				// Mobile\tEmail\tFirst Aid\tEmergency Contact\tEmergency
+				// Contact No\tEmergency Contact No2\Comment\ttID"
 
 				Person r = null;
 				String idStr = (seg.length >= maxParts ? seg[maxParts - 1]
@@ -58,8 +66,9 @@ public class ProcessUploadDAO {
 				if (id != 0) {
 					r = datastore.load(TR.class, id);
 				}
-
+				System.out.println("id = " + id);
 				if (r != null) {
+					System.out.println("r found: " + r.getLastName());
 					if (!isRaceDayFileUploadUpdatesRiders) {
 						TRH rh = new TRH();
 
@@ -88,6 +97,8 @@ public class ProcessUploadDAO {
 						} catch (RuntimeException e) {
 							rh.setPoints(MyConst.getPointsnotset());
 						}
+						System.out.println("seg[25]: " + seg[25]);
+						rh.setComment(seg[25].isEmpty() ? "" : seg[25]);
 
 						datastore.store(rh);
 					} else {
@@ -193,8 +204,9 @@ public class ProcessUploadDAO {
 			// person.setNumber(Integer.parseInt(seg[0]));
 			// }
 
-			if (!seg[3].isEmpty())
+			if (!seg[3].isEmpty()) {
 				person.setGrade(seg[3]);
+			}
 			if (!seg[4].isEmpty()) {
 				try {
 					person.setSubGrade(seg[4].isEmpty() ? 0 : Integer
@@ -203,36 +215,48 @@ public class ProcessUploadDAO {
 					person.setSubGrade(0);
 				}
 			}
-			if (!seg[5].isEmpty())
+			if (!seg[5].isEmpty()) {
 				person.setCriteriumGrade(seg[5]);
-			if (!seg[11].isEmpty())
+			}
+			if (!seg[11].isEmpty()) {
 				person.setAVCCNumber(seg[11]);
+			}
 			if (!seg[13].isEmpty()) {
 				person.setGender(Gender.getGender(seg[13]));
 			}
-			if (!seg[14].isEmpty())
+			if (!seg[14].isEmpty()) {
 				person.setStreet(seg[14]);
-			if (!seg[15].isEmpty())
+			}
+			if (!seg[15].isEmpty()) {
 				person.setSuburb(seg[15]);
-			if (!seg[16].isEmpty())
+			}
+			if (!seg[16].isEmpty()) {
 				person.setState(seg[16]);
-			if (!seg[17].isEmpty())
+			}
+			if (!seg[17].isEmpty()) {
 				person.setPostcode(seg[17]);
-			if (!seg[18].isEmpty())
+			}
+			if (!seg[18].isEmpty()) {
 				person.setPhoneHome(seg[18]);
-			if (!seg[19].isEmpty())
+			}
+			if (!seg[19].isEmpty()) {
 				person.setPhoneWorkOrMobile(seg[19]);
-			if (seg.length > 20 && !seg[20].isEmpty())
+			}
+			if (seg.length > 20 && !seg[20].isEmpty()) {
 				person.setEmail(seg[20]);
+			}
 			if (seg.length > 21 && seg[21].trim().equals("1")) {
 				person.setFirstAid(true);
 			}
-			if (seg.length > 22 && !seg[22].isEmpty())
+			if (seg.length > 22 && !seg[22].isEmpty()) {
 				person.setEmergencyContact(seg[22]);
-			if (seg.length > 23 && !seg[23].isEmpty())
+			}
+			if (seg.length > 23 && !seg[23].isEmpty()) {
 				person.setPhoneEmergencyContact(seg[23]);
-			if (seg.length > 24 && !seg[24].isEmpty())
+			}
+			if (seg.length > 24 && !seg[24].isEmpty()) {
 				person.setPhoneEmergencyContact2(seg[24]);
+			}
 		}
 
 		return person;

@@ -1,7 +1,6 @@
 package com.actvc.server;
 
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,6 +75,7 @@ public class AppServiceImpl extends RemoteServiceServlet implements
 				datastore.delete(iterator.next());
 				dataToDelete++;
 			}
+			log.info("deleted: " + dataToDelete);
 			return dataToDelete;
 		} catch (RuntimeException e) {
 			throw handleException(e);
@@ -899,11 +899,7 @@ public class AppServiceImpl extends RemoteServiceServlet implements
 	 * @throws ParseException
 	 */
 	public static Date processDate(String dateStr) throws ParseException {
-		String[] dateParts = dateStr.replace('.', '/').split(" ");
-		Date d;
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		d = df.parse(dateParts[0]);
-		return d;
+		return new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(dateStr);
 	}
 
 	@Override

@@ -32,7 +32,6 @@ public class EditRaceHistory extends LookupEditBase {
 	ListBox riders;
 	ListBox ridersForAnEvent;
 	TextBox grade;
-	TextBox criteriumGrade;
 	TextBox place;
 	TextBox overTheLine;
 	TextBox time;
@@ -47,7 +46,6 @@ public class EditRaceHistory extends LookupEditBase {
 		riders = new ListBox();
 		ridersForAnEvent = new ListBox();
 		grade = new TextBox();
-		criteriumGrade = new TextBox();
 		place = new TextBox();
 		overTheLine = new TextBox();
 		time = new TextBox();
@@ -59,18 +57,16 @@ public class EditRaceHistory extends LookupEditBase {
 		contentTbl = new FlexTable();
 		contentTbl.setWidget(0, 0, new Label("Race Grade"));
 		contentTbl.setWidget(0, 1, grade);
-		contentTbl.setWidget(1, 0, new Label("Criterium Grade"));
-		contentTbl.setWidget(1, 1, criteriumGrade);
-		contentTbl.setWidget(2, 0, new Label("Over the Line"));
-		contentTbl.setWidget(2, 1, overTheLine);
-		contentTbl.setWidget(3, 0, new Label("Place"));
-		contentTbl.setWidget(3, 1, place);
-		contentTbl.setWidget(4, 0, new Label("Time"));
-		contentTbl.setWidget(4, 1, time);
-		contentTbl.setWidget(5, 0, new Label("Points"));
-		contentTbl.setWidget(5, 1, points);
-		contentTbl.setWidget(6, 0, new Label("Comment"));
-		contentTbl.setWidget(6, 1, comment);
+		contentTbl.setWidget(1, 0, new Label("Over the Line"));
+		contentTbl.setWidget(1, 1, overTheLine);
+		contentTbl.setWidget(2, 0, new Label("Place"));
+		contentTbl.setWidget(2, 1, place);
+		contentTbl.setWidget(3, 0, new Label("Time"));
+		contentTbl.setWidget(3, 1, time);
+		contentTbl.setWidget(4, 0, new Label("Points"));
+		contentTbl.setWidget(4, 1, points);
+		contentTbl.setWidget(5, 0, new Label("Comment"));
+		contentTbl.setWidget(5, 1, comment);
 
 		contentPanel.add(contentTbl);
 
@@ -82,14 +78,13 @@ public class EditRaceHistory extends LookupEditBase {
 		riders.setSelectedIndex(0);
 		ridersForAnEvent.setSelectedIndex(0);
 		blankFields();
-		if (editRb.getValue() && (riders.getSelectedIndex() == 0)) {
+		if (editRb.getValue() && riders.getSelectedIndex() == 0) {
 			enableContentFields(false);
 		}
 	}
 
 	private void blankFields() {
 		grade.setText("");
-		criteriumGrade.setText("");
 		place.setText("");
 		overTheLine.setText("");
 		time.setText("");
@@ -142,13 +137,6 @@ public class EditRaceHistory extends LookupEditBase {
 			return;
 		}
 		grade.setText(grade.getText().toUpperCase());
-
-		if (criteriumGrade.getText().length() == 0) {
-			Window.alert("A Criterium Grade is required");
-			criteriumGrade.setFocus(true);
-			return;
-		}
-		criteriumGrade.setText(criteriumGrade.getText().toUpperCase());
 
 		try {
 			if (place.getText().trim().length() == 0) {
@@ -207,7 +195,6 @@ public class EditRaceHistory extends LookupEditBase {
 			rh.setPlace(checkedPlace);
 			rh.setPoints(checkedPoints);
 			rh.setRaceGrade(grade.getText());
-			rh.setCriteriumGrade(criteriumGrade.getText());
 			rh.setTime(time.getText());
 			rh.setComment(comment.getText());
 
@@ -225,7 +212,6 @@ public class EditRaceHistory extends LookupEditBase {
 		ridersForAnEvent.addItem("");
 		riders.addItem("Select a Rider");
 		grade.setStylePrimaryName("uppercase");
-		criteriumGrade.setStylePrimaryName("uppercase");
 		place.setStylePrimaryName("numbertextbox");
 		overTheLine.setStylePrimaryName("numbertextbox");
 		time.setStylePrimaryName("numbertextbox");
@@ -310,7 +296,7 @@ public class EditRaceHistory extends LookupEditBase {
 							}
 						} finally {
 							if (editRb.getValue()
-									&& (riders.getSelectedIndex() == 0)) {
+									&& riders.getSelectedIndex() == 0) {
 								enableContentFields(false);
 							}
 						}
@@ -326,7 +312,6 @@ public class EditRaceHistory extends LookupEditBase {
 						if (result.getRaceHistory() != null) {
 							TRH rh = result.getRaceHistory();
 							grade.setText(rh.getRaceGrade());
-							criteriumGrade.setText(rh.getCriteriumGrade());
 							place.setText(Integer.toString(rh.getPlace()));
 							overTheLine.setText(Integer.toString(rh
 									.getOverTheLine()));

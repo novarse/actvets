@@ -21,8 +21,8 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 public class GetTEDTO {
 	private final ObjectDatastore datastore = Util.getDatastore();
-	private static final Logger log = Logger
-			.getLogger(GetTEDTO.class.getName());
+	private static final Logger logger = Logger.getLogger(GetTEDTO.class
+			.getName());
 
 	public synchronized TEDTO loadEvents(boolean isFuture, boolean smallList) {
 		return isFuture ? loadFutureEvents(smallList)
@@ -137,7 +137,7 @@ public class GetTEDTO {
 
 		TE event = datastore.load(TE.class, eventId);
 		if (event == null) {
-			log.info("Could not find event with id = " + eventId);
+			logger.info("Could not find event with id = " + eventId);
 			return null;
 		}
 		addRelatedFields(event, result);
@@ -160,7 +160,6 @@ public class GetTEDTO {
 		} else {
 			rhIterator = root.addSort("raceGrade").addSort("place").now();
 		}
-
 		while (rhIterator.hasNext()) {
 			TRH rh = rhIterator.next();
 			result.getRaceHistoryMap().put(rh.getId(), rh);
@@ -172,28 +171,49 @@ public class GetTEDTO {
 	}
 
 	private void addRelatedFields(TE event, TEDTO result) {
+
+		Long eventDescriptionId = event.getEventDescriptionId();
+		if (!result.getDescriptionMap().containsKey(eventDescriptionId)) {
+			TED desc = datastore.load(TED.class, eventDescriptionId);
+			if (desc == null) {
+				logger.warning("Could not find description: "
+						+ eventDescriptionId);
+				return;
+			}
+			result.getDescriptionMap().put(eventDescriptionId, desc);
+		}
+
+		Long eventTypeId = event.getEventTypeId();
+		if (!result.getTypeMap().containsKey(eventTypeId)) {
+			TET eventType = datastore.load(TET.class, eventTypeId);
+			if (eventType == null) {
+				logger.warning("Event Type not found: " + eventTypeId);
+				return;
+			}
+			result.getTypeMap().put(eventTypeId, eventType);
+		}
+
+		Long locationId = event.getLocationId();
+		if (!result.getLocationMap().containsKey(locationId)) {
+			TEL location = datastore.load(TEL.class, locationId);
+			if (location == null) {
+				logger.warning("Could not find location: " + locationId);
+				return;
+			}
+			result.getLocationMap().put(locationId, location);
+		}
+
+		Long directorId = event.getDirectorId();
+		if (directorId != null
+				&& !result.getDirectorMap().containsKey(directorId)) {
+			TR director = datastore.load(TR.class, directorId);
+			if (director == null) {
+				logger.warning("Could not find director: " + directorId);
+				return;
+			}
+			result.getDirectorMap().put(directorId, director);
+		}
+
 		result.getEventMap().put(event.getId(), event);
-
-		if (!result.getDescriptionMap().containsKey(
-				event.getEventDescriptionId())) {
-			result.getDescriptionMap().put(event.getEventDescriptionId(),
-					datastore.load(TED.class, event.getEventDescriptionId()));
-		}
-
-		if (!result.getTypeMap().containsKey(event.getEventTypeId())) {
-			result.getTypeMap().put(event.getEventTypeId(),
-					datastore.load(TET.class, event.getEventTypeId()));
-		}
-
-		if (!result.getLocationMap().containsKey(event.getLocationId())) {
-			result.getLocationMap().put(event.getLocationId(),
-					datastore.load(TEL.class, event.getLocationId()));
-		}
-
-		if (event.getDirectorId() != null
-				&& !result.getDirectorMap().containsKey(event.getDirectorId())) {
-			result.getDirectorMap().put(event.getDirectorId(),
-					datastore.load(TR.class, event.getDirectorId()));
-		}
 	}
 }

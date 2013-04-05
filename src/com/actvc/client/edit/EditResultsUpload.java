@@ -56,8 +56,12 @@ public class EditResultsUpload extends EditBase {
 		lookupTable.setWidget(0, 2, description);
 		lookupTable.getColumnFormatter().setWidth(0, "80px");
 
-		contentTbl.setWidget(0, 0, new Label(
-				"Select the results file to upload"));
+		contentTbl
+				.setWidget(
+						0,
+						0,
+						new Label(
+								"Select the results file to upload (The file needs to be a CSV formatted file)"));
 		contentTbl.getFlexCellFormatter().setColSpan(0, 0, 2);
 		contentTbl.setWidget(1, 0, fileUpload);
 		contentTbl.setWidget(1, 1, uploadBtn);

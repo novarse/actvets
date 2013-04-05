@@ -21,7 +21,7 @@ public class TEDTest {
 	 */
 	@Test
 	public void testToExportForm() {
-		TED ed = new TED(1L, "Description", "5", "6");
+		TED ed = new TED(1L, "Description", "5", "6", true);
 		Assert.assertEquals(EXPORTSTR, ed.toExportForm());
 	}
 }

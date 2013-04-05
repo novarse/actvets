@@ -3,6 +3,7 @@ package com.actvc.client.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.actvc.client.util.Utils;
 import com.google.code.twig.annotation.Id;
 
 public class TE implements Serializable, TEntity {
@@ -21,17 +22,6 @@ public class TE implements Serializable, TEntity {
 	private Long seasonId;
 
 	private Long directorId;
-
-	// public TE(Long id, Date date, Long eventDescriptionId, Long eventTypeId,
-	// Long locationId, Long directorId) {
-	// super();
-	// this.id = id;
-	// this.date = date;
-	// this.eventDescriptionId = eventDescriptionId;
-	// this.eventTypeId = eventTypeId;
-	// this.locationId = locationId;
-	// this.directorId = directorId;
-	// }
 
 	public TE() {
 
@@ -93,11 +83,28 @@ public class TE implements Serializable, TEntity {
 		return seasonId;
 	}
 
+	@Override
+	// public String toExportForm() {
+	// String result = getId() + TAB + getDate() + TAB + getDirectorId() + TAB
+	// + getSeasonId() + TAB + getLocationId() + TAB
+	// + getEventDescriptionId() + TAB + getEventTypeId();
+	// return result;
+	// }
 	public String toExportForm() {
-		String result = getId() + TAB + getDate() + TAB + getDirectorId() + TAB
-				+ getSeasonId() + TAB + getLocationId() + TAB
-				+ getEventDescriptionId() + TAB + getEventTypeId();
+		String result = getId() + TAB + Utils.formatDateForExport(getDate())
+				+ TAB + Utils.formatIdForExport(getDirectorId()) + TAB
+				+ Utils.formatIdForExport(getSeasonId()) + TAB
+				+ getLocationId() + TAB + getEventDescriptionId() + TAB
+				+ getEventTypeId();
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "TE [id=" + id + ", date=" + date + ", eventDescriptionId="
+				+ eventDescriptionId + ", eventTypeId=" + eventTypeId
+				+ ", locationId=" + locationId + ", seasonId=" + seasonId
+				+ ", directorId=" + directorId + "]";
 	}
 
 }

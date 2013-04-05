@@ -21,12 +21,13 @@ public class TED implements Serializable, TEntity {
 	public TED() {
 	}
 
-	public TED(Long id, String description, String distLong, String distShort) {
+	public TED(Long id, String description, String distLong, String distShort,
+			boolean isActive) {
 		this.id = id;
 		this.description = description;
 		this.distLong = distLong;
 		this.distShort = distShort;
-		this.setActive(true);
+		this.setActive(isActive);
 	};
 
 	public Long getId() {
@@ -61,6 +62,7 @@ public class TED implements Serializable, TEntity {
 		this.distShort = distShort;
 	}
 
+	@Override
 	public String toExportForm() {
 		return getId() + TAB + getDescription() + TAB + getDistLong() + TAB
 				+ getDistShort() + TAB + isActive();
@@ -72,6 +74,13 @@ public class TED implements Serializable, TEntity {
 
 	public boolean isActive() {
 		return isActive;
+	}
+
+	@Override
+	public String toString() {
+		return "TED [id=" + id + ", description=" + description + ", distLong="
+				+ distLong + ", distShort=" + distShort + ", isActive="
+				+ isActive + "]";
 	}
 
 }

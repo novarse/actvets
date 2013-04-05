@@ -20,11 +20,13 @@ public class ParseEvent implements ParseBase {
 		}
 		event.setDirectorId(!items[2].trim().isEmpty() ? Long
 				.parseLong(items[2]) : null);
-		long season = items[3].equals("S") ? 1 : (items[3].equals("W") ? 2 : 0);
-		if (season == 0) {
-			throw new RuntimeException("Invalid season: " + items[3]);
-		}
-		event.setSeasonId(season);
+		// long season = items[3].equals("S") ? 1 : (items[3].equals("W") ? 2 :
+		// 0);
+		// if (season == 0) {
+		// throw new RuntimeException("Invalid season: " + items[3]);
+		// }
+		event.setSeasonId(!items[3].trim().isEmpty() ? Long.parseLong(items[3])
+				: null);
 		event.setLocationId(Long.parseLong(items[4]));
 		event.setEventDescriptionId(Long.parseLong(items[5]));
 		event.setEventTypeId(Long.parseLong(items[6]));

@@ -109,12 +109,10 @@ public class ContentFuture extends ContentWidget {
 					@Override
 					public void event(LoadFutureEventsReturned result) {
 						if (result.getEventList() != null) {
-
 							if (loadState.equals(loadStates.NEW)
 									|| loadState.equals(loadStates.PARTLOADED)) {
 								buildAndStoreDetails(result.getEventList());
 							}
-							// hh
 							displayDetails();
 						}
 					}
@@ -142,29 +140,27 @@ public class ContentFuture extends ContentWidget {
 	}
 
 	protected void buildAndStoreDetails(TEDTO tedto) {
-		try {
-			Iterator<?> iterator = tedto.getEventMap().entrySet().iterator();
-			while (iterator.hasNext()) {
+		Iterator<?> iterator = tedto.getEventMap().entrySet().iterator();
+		while (iterator.hasNext()) {
+			try {
 				Map.Entry<Long, TE> eventPair = (Entry<Long, TE>) iterator
 						.next();
 
 				EventDetails ed = new EventDetails();
 				ed.setEventID(eventPair.getKey());
 				ed.setDate(eventPair.getValue().getDate());
-
 				ed.setEventType(tedto.getTypeMap()
 						.get(eventPair.getValue().getEventTypeId())
 						.getDescription());
-
+				tedto.getLocationMap()
+						.get(eventPair.getValue().getLocationId());
 				ed.setLocation(tedto.getLocationMap()
 						.get(eventPair.getValue().getLocationId())
 						.getLocation());
-
 				TED eventDesc = tedto.getDescriptionMap().get(
 						eventPair.getValue().getEventDescriptionId());
 				ed.setDistLong(eventDesc.getDistLong());
 				ed.setDistShort(eventDesc.getDistShort());
-
 				Person director = tedto.getDirectorMap().get(
 						eventPair.getValue().getDirectorId());
 				if (director != null) {
@@ -173,14 +169,16 @@ public class ContentFuture extends ContentWidget {
 				}
 
 				eventDetailsList.add(ed);
-			}
 
-			loadState = loadState.equals(loadStates.NEW) ? loadStates.PARTLOADED
-					: loadStates.FULLYLOADED;
-		} catch (RuntimeException e) {
-			MyLog.log(e.getMessage());
-			throw new RuntimeException(e);
+			} catch (RuntimeException e) {
+				MyLog.log("Error in building future events (buildAndStoreDetails): "
+						+ e.getMessage());
+				// throw new RuntimeException(e);
+			}
 		}
+
+		loadState = loadState.equals(loadStates.NEW) ? loadStates.PARTLOADED
+				: loadStates.FULLYLOADED;
 	}
 
 	private void displayDetails() {

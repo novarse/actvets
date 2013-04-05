@@ -42,18 +42,20 @@ public class Uploader {
 
 	public static void main(String[] args) throws IOException {
 
-		// for (int fileNo = 0; fileNo < 9; fileNo++)
-		int fileNo = 5;
-		if (fileNo < FILENAMES.length) {
-			if (fileNo == 5) {
-				processRaceHistory();
-			} else {
-				processFile(fileNo);
+		// for (int fileNo = 0; fileNo <= 8; fileNo++) {
+		{
+			int fileNo = 1;
+			if (fileNo < FILENAMES.length) {
+				if (fileNo == 5) {
+					processRaceHistory();
+				} else {
+					processFile(fileNo);
+				}
 			}
 		}
-		processFile(ADMIN);
+		// processFile(ADMIN);
 		// processFile(MAINTENANCE);
-		runExecuteStatement("update");
+		// runExecuteStatement("update");
 		log.info("Done");
 	}
 
@@ -90,7 +92,7 @@ public class Uploader {
 			while ((line = br.readLine()) != null) {
 				s.append(line);
 				s.append("\n");
-				if ((++count % MAXLINES) == 0) {
+				if (++count % MAXLINES == 0) {
 					try {
 						sendReceive(s, fileNo);
 						count = 0;

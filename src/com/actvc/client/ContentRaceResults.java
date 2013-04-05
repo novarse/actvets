@@ -83,22 +83,23 @@ public class ContentRaceResults extends ContentWidget {
 			HTMLTable resultsTable) {
 		int row = resultsTable.getRowCount();
 		try {
-			MyAnchor lastNameLbl = new MyAnchor(rider.getLastName(), rh
-					.getRiderId());
-			MyAnchor firstNameLbl = new MyAnchor(rider.getFirstName(), rh
-					.getRiderId());
+			MyAnchor lastNameLbl = new MyAnchor(rider.getLastName(),
+					rh.getRiderId());
+			MyAnchor firstNameLbl = new MyAnchor(rider.getFirstName(),
+					rh.getRiderId());
 			Label gradeLbl = new Label(rider.getGrade());
+			Label criteriumGradeLbl = new Label(rider.getCriteriumGrade());
 			Label placeLbl;
 			Label pointsLbl;
-
 			resultsTable.setWidget(row, 0, lastNameLbl);
 			resultsTable.setWidget(row, 1, firstNameLbl);
 			resultsTable.setWidget(row, 2, gradeLbl);
+			resultsTable.setWidget(row, 3, criteriumGradeLbl);
 			if (rider.getNumber() == -1) {
-				resultsTable.setWidget(row, 3, new Label(""));
+				resultsTable.setWidget(row, 4, new Label(""));
 			} else {
-				resultsTable.setWidget(row, 3, new Label(Integer.toString(rider
-						.getNumber())));
+				resultsTable.setWidget(row, 4,
+						new Label(Integer.toString(rider.getNumber())));
 			}
 			if (isHandicap) {
 				if (rh.getOverTheLine() == 10000) {
@@ -113,12 +114,11 @@ public class ContentRaceResults extends ContentWidget {
 					placeLbl = new Label(Integer.toString(rh.getPlace()));
 				}
 			}
-			resultsTable.setWidget(row, 4, placeLbl);
-
+			resultsTable.setWidget(row, 5, placeLbl);
 			if (rh.getTime() == null || rh.getTime().length() == 0) {
-				resultsTable.setWidget(row, 5, new Label(""));
+				resultsTable.setWidget(row, 6, new Label(""));
 			} else {
-				resultsTable.setWidget(row, 5, new Label(rh.getTime()));
+				resultsTable.setWidget(row, 6, new Label(rh.getTime()));
 			}
 
 			if (rh.getPoints() == -1) {
@@ -126,16 +126,20 @@ public class ContentRaceResults extends ContentWidget {
 			} else {
 				pointsLbl = new Label(Integer.toString(rh.getPoints()));
 			}
-			resultsTable.setWidget(row, 6, pointsLbl);
+			resultsTable.setWidget(row, 7, pointsLbl);
 
-			if (subRow % 2 == 0)
+			if (rh.getComment() != null) {
+				resultsTable.setWidget(row, 8, new Label(rh.getComment()));
+			}
+			if (subRow % 2 == 0) {
 				resultsTable.getRowFormatter().setStylePrimaryName(row,
 						"resultstablealtrow");
-			else
+			} else {
 				resultsTable.getRowFormatter().setStylePrimaryName(row,
 						"resultstablerow");
+			}
 
-			for (int c = 0; c < 7; c++) {
+			for (int c = 0; c < 9; c++) {
 				resultsTable.getCellFormatter().setStylePrimaryName(row, c,
 						"resultstablecell");
 			}
@@ -148,6 +152,7 @@ public class ContentRaceResults extends ContentWidget {
 			firstNameLbl.setTitle("Click to show rider details");
 			lastNameLbl.setTitle("Click to show rider details");
 			gradeLbl.setTitle("Riders normal grade");
+			criteriumGradeLbl.setTitle("Riders normal criterium grade");
 
 			lastNameLbl.addClickHandler(nameClickHandler());
 			firstNameLbl.addClickHandler(nameClickHandler());
@@ -159,19 +164,18 @@ public class ContentRaceResults extends ContentWidget {
 	}
 
 	private ClickHandler nameClickHandler() {
-		return (new ClickHandler() {
+		return new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				MyAnchor ml = (MyAnchor) event.getSource();
 				controller.event(new ShowRiderResults(ml.getTag()));
 			}
-		});
+		};
 	}
 
 	private void buildResults(TEDTO tedto) {
 		getContent().clear();
-
 		TE event = (TE) tedto.getEventMap().values().toArray()[0];
 		TET et = tedto.getTypeMap().get(event.getEventTypeId());
 		TED ed = tedto.getDescriptionMap().get(event.getEventDescriptionId());
@@ -194,7 +198,7 @@ public class ContentRaceResults extends ContentWidget {
 				+ (ed.getDistShort().equals(ed.getDistLong()) ? ")" : "/"
 						+ ed.getDistShort() + "km)"));
 
-		isHandicap = (et.getId() == MyConst.getHandicapId());
+		isHandicap = et.getId() == MyConst.getHandicapId();
 		int i = 0;
 		String lastGrade = "  ";
 		FlexTable resultsTable = new FlexTable();
@@ -209,6 +213,7 @@ public class ContentRaceResults extends ContentWidget {
 					.iterator();
 			while (iterator.hasNext()) {
 				TRH rh = iterator.next();
+				System.out.println(rh);
 				if (isHandicap) {
 
 				} else {
@@ -217,7 +222,7 @@ public class ContentRaceResults extends ContentWidget {
 						int row = resultsTable.getRowCount();
 						resultsTable.setWidget(row, 0, new Label(grade));
 						resultsTable.getFlexCellFormatter().setColSpan(row, 0,
-								7);
+								9);
 						resultsTable.getRowFormatter().addStyleName(row,
 								"gradeline");
 						resultsTable.setTitle("Race Grading");
@@ -242,14 +247,16 @@ public class ContentRaceResults extends ContentWidget {
 	private void addEventRiderHeader(HTMLTable resultsTable) {
 		resultsTable.setWidget(0, 0, new HTML("Last Name"));
 		resultsTable.setWidget(0, 1, new HTML("First Name"));
-		resultsTable.setWidget(0, 2, new HTML("Grade"));
-		resultsTable.setWidget(0, 3, new HTML("Rider No"));
-		resultsTable.setWidget(0, 4, new HTML("Place"));
-		resultsTable.setWidget(0, 5, new HTML("Time"));
-		resultsTable.setWidget(0, 6, new HTML("Points"));
+		resultsTable.setWidget(0, 2, new HTML("Rd Grd"));
+		resultsTable.setWidget(0, 3, new HTML("Crit Grd"));
+		resultsTable.setWidget(0, 4, new HTML("Rider No"));
+		resultsTable.setWidget(0, 5, new HTML("Place"));
+		resultsTable.setWidget(0, 6, new HTML("Time"));
+		resultsTable.setWidget(0, 7, new HTML("Points"));
+		resultsTable.setWidget(0, 8, new HTML("Comments"));
 		resultsTable.getRowFormatter().setStylePrimaryName(0,
 				"resultstableheader");
-		for (int c = 0; c < 7; c++) {
+		for (int c = 0; c < 9; c++) {
 			resultsTable.getCellFormatter().setStylePrimaryName(0, c,
 					"resultstablecell");
 		}

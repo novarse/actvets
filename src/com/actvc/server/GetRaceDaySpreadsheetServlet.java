@@ -54,7 +54,7 @@ public class GetRaceDaySpreadsheetServlet extends HttpServlet implements
 			out.println(eventDesc);
 			out.println();
 			out.println("Number\tSurname\tFirstName\tGrade\tSubGrade\tCriterium\tRace Grade\tPosition\tOverTheLine\tTime\tPoints\tAVCCNumber\tDOB\tGender\tStreet"
-					+ "\tSuburb\tState\tPostcode\tHome Phone\tWork or Mobile\tEmail\tFirst Aid\tEmergency Contact\tEmergency Contact No\tEmergency Contact No2\tID");
+					+ "\tSuburb\tState\tPostcode\tHome Phone\tWork or Mobile\tEmail\tFirst Aid\tEmergency Contact\tEmergency Contact No\tEmergency Contact No2\tComment\tID");
 			outputActiveRiders(out);
 
 			outputPendingRiders(out);
@@ -95,7 +95,7 @@ public class GetRaceDaySpreadsheetServlet extends HttpServlet implements
 					+ (tr.isFirstAid() ? "1" : "") + "\t"
 					+ tr.getEmergencyContact() + "\t"
 					+ tr.getPhoneEmergencyContact() + "\t"
-					+ tr.getPhoneEmergencyContact2() + "\t" + tr.getId());
+					+ tr.getPhoneEmergencyContact2() + "\t" + "\t" + tr.getId());
 		}
 	}
 
@@ -133,7 +133,7 @@ public class GetRaceDaySpreadsheetServlet extends HttpServlet implements
 					+ (prh.isFirstAid() ? "1" : "") + "\t"
 					+ prh.getEmergencyContact() + "\t"
 					+ prh.getPhoneEmergencyContact() + "\t"
-					+ prh.getPhoneEmergencyContact2());
+					+ prh.getPhoneEmergencyContact2() + "\t");
 		}
 	}
 
@@ -170,7 +170,7 @@ public class GetRaceDaySpreadsheetServlet extends HttpServlet implements
 					+ (tr.isFirstAid() ? "1" : "") + "\t"
 					+ tr.getEmergencyContact() + "\t"
 					+ tr.getPhoneEmergencyContact() + "\t"
-					+ tr.getPhoneEmergencyContact2() + "\t" + tr.getId());
+					+ tr.getPhoneEmergencyContact2() + "\t" + "\t" + tr.getId());
 		}
 	}
 
