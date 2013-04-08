@@ -53,7 +53,7 @@ public class Uploader {
 				}
 			}
 		}
-		// processFile(ADMIN);
+		processFile(ADMIN);
 		// processFile(MAINTENANCE);
 		// runExecuteStatement("update");
 		log.info("Done");
@@ -61,7 +61,7 @@ public class Uploader {
 
 	private static void processRaceHistory() throws FileNotFoundException,
 			MalformedURLException, IOException {
-		for (int i = 1; i <= 16; i++) { // done 4 for local
+		for (int i = 1; i <= 1; i++) { // done 4 for local
 			process(5, dir + "racehistory" + i + ".txt");
 		}
 	}

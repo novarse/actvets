@@ -213,7 +213,6 @@ public class ContentRaceResults extends ContentWidget {
 					.iterator();
 			while (iterator.hasNext()) {
 				TRH rh = iterator.next();
-				System.out.println(rh);
 				if (isHandicap) {
 
 				} else {

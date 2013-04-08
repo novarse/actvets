@@ -79,7 +79,6 @@ public class ContentRiderPoints extends ContentWidget {
 
 					@Override
 					public void event(GetRiderPoints result) {
-						System.out.println("1");
 						if (result != null) {
 							service.getRiderPoints(result.getSeasonId());
 						}

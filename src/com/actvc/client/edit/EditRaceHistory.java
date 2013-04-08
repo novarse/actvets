@@ -186,11 +186,6 @@ public class EditRaceHistory extends LookupEditBase {
 					.parseLong(riders.getValue(riders.getSelectedIndex()));
 			TRH rh = new TRH();
 			rh.setId(getLookupId(), riderId);
-			// Date d = MyDate.convertFromStringToDate(lookup.getItemText(lookup
-			// .getSelectedIndex()));
-			// System.out.println("date = "
-			// + lookup.getItemText(lookup.getSelectedIndex()));
-			// rh.setDate(d);
 			rh.setOverTheLine(checkedOverTheLine);
 			rh.setPlace(checkedPlace);
 			rh.setPoints(checkedPoints);

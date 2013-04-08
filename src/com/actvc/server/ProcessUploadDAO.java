@@ -45,14 +45,8 @@ public class ProcessUploadDAO {
 		final String NUMBER = "NUMBER";
 		final int maxParts = 27;
 		try {
-			System.out.println("seg = " + Arrays.toString(seg));
-			System.out.println("seg.length = " + seg.length);
-			if (seg.length >= 7) {
-				System.out.println("seg[6] = " + seg[6]);
-			}
 			if ((isRaceDayFileUploadUpdatesRiders || (seg.length >= 7 && !seg[6]
 					.isEmpty())) && !NUMBER.equals(seg[0].toUpperCase())) {
-				System.out.println("cdddddddd");
 				// "Number\tSurname\tFirstName\tGrade\tSubGrade\tCriterium\tRace Grade\tPosition\tOverTheLine\tTime\tPoints\tAVCCNumber\tDOB\tGender\tStreet"
 				// "\tSuburb\tState\tPostcode\tHome Phone\tWork or
 				// Mobile\tEmail\tFirst Aid\tEmergency Contact\tEmergency
@@ -66,9 +60,7 @@ public class ProcessUploadDAO {
 				if (id != 0) {
 					r = datastore.load(TR.class, id);
 				}
-				System.out.println("id = " + id);
 				if (r != null) {
-					System.out.println("r found: " + r.getLastName());
 					if (!isRaceDayFileUploadUpdatesRiders) {
 						TRH rh = new TRH();
 
@@ -97,14 +89,10 @@ public class ProcessUploadDAO {
 						} catch (RuntimeException e) {
 							rh.setPoints(MyConst.getPointsnotset());
 						}
-						System.out.println("seg[25]: " + seg[25]);
 						rh.setComment(seg[25].isEmpty() ? "" : seg[25]);
 
 						datastore.store(rh);
 					} else {
-						// System.out.println(((TR) processDetails(r, event,
-						// seg))
-						// .toExportForm());
 						datastore.storeOrUpdate(processDetails(r, event, seg));
 					}
 				} else {

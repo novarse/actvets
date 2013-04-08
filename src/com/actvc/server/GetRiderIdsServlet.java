@@ -81,8 +81,6 @@ public class GetRiderIdsServlet extends HttpServlet {
 		String surname = line[1].trim().toUpperCase();
 		String firstName = line[2].trim().toUpperCase();
 		String result = "";
-		System.out.println("Surname: >" + surname + "<; Firstname:>"
-				+ firstName + "<");
 
 		try {
 

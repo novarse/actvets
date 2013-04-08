@@ -12,12 +12,12 @@ import com.actvc.client.entities.TEL;
 import com.actvc.client.entities.TET;
 import com.actvc.client.entities.TR;
 import com.actvc.client.entities.TRH;
+import com.actvc.server.util.Utils;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.QueryResultIterator;
 import com.google.code.twig.FindCommand.RootFindCommand;
 import com.google.code.twig.ObjectDatastore;
-import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 public class GetTEDTO {
 	private final ObjectDatastore datastore = Util.getDatastore();
@@ -69,9 +69,12 @@ public class GetTEDTO {
 	 */
 	public TEDTO loadFutureEventsByMonths(Integer months) {
 		TEDTO result = new TEDTO();
-
 		Date fromDate = new Date();
-		Date toDate = getDateMonthsFromNow(new Date(), months);
+		if (months == null) {
+			logger.warning("in loadFutureEventsByMonths. months = null");
+			return result;
+		}
+		Date toDate = Utils.getDateMonthsFrom(new Date(), months);
 
 		QueryResultIterator<TE> iterator = datastore
 				.find()
@@ -97,11 +100,6 @@ public class GetTEDTO {
 			result.getDescriptionMap().put(event.getEventDescriptionId(),
 					datastore.load(TED.class, event.getEventDescriptionId()));
 		}
-	}
-
-	private Date getDateMonthsFromNow(Date date, Integer months) {
-		CalendarUtil.addMonthsToDate(date, months);
-		return date;
 	}
 
 	public TEDTO loadHistoricEvents(boolean smallList) {
